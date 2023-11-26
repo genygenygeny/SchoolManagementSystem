@@ -20,9 +20,9 @@ public class Course {
 
     /**
      * AllArgumentsConstructor creates an instance of the class.
-     * @param courseName name of course
-     * @param credit number of credits of course
-     * @param department the department of course
+     * @param courseName name of course.
+     * @param credit number of credits of course.
+     * @param department the department of course.
      * @author Geny Tang
      */
     public Course(String courseName, double credit, Department department) {
@@ -34,7 +34,7 @@ public class Course {
 
     /**
      * ToString() is a method that represents a Course object as a formatted String.
-     * @return returns a formatted String
+     * @return returns a formatted String.
      * @author Geny Tang
      */
     @Override
