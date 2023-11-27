@@ -3,6 +3,7 @@ package org.geny.dto;
 /**
  * Contains attributes such as id and departmentName.
  * The attributes are given to the objects of this class.
+ *
  * @author Geny Tang
  */
 public class Department {
@@ -12,6 +13,7 @@ public class Department {
 
     /**
      * AllArgumentsConstructor creates an instance of the class.
+     *
      * @param departmentName name of the department.
      * @author Geny Tang
      */
@@ -22,6 +24,7 @@ public class Department {
 
     /**
      * ToString() is a method that represents a Department object as a formatted String.
+     *
      * @return returns a formatted String.
      * @author Geny Tang
      */

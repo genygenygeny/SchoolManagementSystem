@@ -6,6 +6,7 @@ import java.util.Arrays;
  * This class has access to Department, Teacher and Student.
  * Contains attributes such as courseName, id, credit, teacher, students, studentNum and department.
  * The attributes are given to the objects of this class.
+ *
  * @author Geny Tang
  */
 public class Course {
@@ -20,8 +21,9 @@ public class Course {
 
     /**
      * AllArgumentsConstructor creates an instance of the class.
+     *
      * @param courseName name of course.
-     * @param credit number of credits of course.
+     * @param credit     number of credits of course.
      * @param department the department of course.
      * @author Geny Tang
      */
@@ -34,6 +36,7 @@ public class Course {
 
     /**
      * ToString() is a method that represents a Course object as a formatted String.
+     *
      * @return returns a formatted String.
      * @author Geny Tang
      */
