@@ -11,6 +11,7 @@ import java.util.Arrays;
  */
 public class Course {
     private static int nextId = 1;
+
     private String courseName;
     private String id;
     private double credit;
