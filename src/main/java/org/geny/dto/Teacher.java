@@ -1,5 +1,8 @@
 package org.geny.dto;
 
+import lombok.Getter;
+
+@Getter
 /**
  * This class has access to Department.
  * Contains attributes such as firstName, lastName, id and department.
@@ -19,8 +22,9 @@ public class Teacher {
      * @param firstName  first name of teacher.
      * @param lastName   last name of teacher.
      * @param department department of teacher.
+     * @param id
      */
-    public Teacher(String firstName, String lastName, Department department) {
+    public Teacher(String firstName, String lastName, Department department, String id) {
         this.id = String.format("T%03d", nextId++);
         this.firstName = firstName;
         this.lastName = lastName;

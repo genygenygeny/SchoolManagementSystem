@@ -1,6 +1,9 @@
 package org.geny.dto;
 
+import lombok.Getter;
 import java.util.Arrays;
+
+@Getter
 
 /**
  * This class has access to Department and Course.
@@ -26,7 +29,7 @@ public class Student {
      * @param department department of student.
      * @author Geny Tang
      */
-    public Student(String firstName, String lastName, Department department) {
+    public Student(String firstName, String lastName, String id, Department department) {
         this.id = String.format("S%03d", nextId++);
         this.firstName = firstName;
         this.lastName = lastName;

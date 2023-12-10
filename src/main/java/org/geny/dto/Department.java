@@ -1,5 +1,9 @@
 package org.geny.dto;
 
+import lombok.Getter;
+
+@Getter
+
 /**
  * Contains attributes such as id and departmentName.
  * The attributes are given to the objects of this class.

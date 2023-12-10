@@ -1,6 +1,11 @@
 package org.geny.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Arrays;
+@Getter
+@Setter
 
 /**
  * This class has access to Department, Teacher and Student.
