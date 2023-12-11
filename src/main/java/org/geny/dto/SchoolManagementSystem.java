@@ -23,6 +23,17 @@ public class SchoolManagementSystem {
     private Course[] courses;
     private int courseNum;
 
+    public SchoolManagementSystem() {
+        this.departments = new Department[MAX_DEPARTMENT_NUM];
+        this.departmentNum = 0;
+        this.students = new Student[MAX_STUDENT_NUM];
+        this.studentNum = 0;
+        this.teachers = new Teacher[MAX_TEACHER_NUM];
+        this.teacherNum = 0;
+        this.courses = new Course[MAX_COURSE_NUM];
+        this.courseNum = 0;
+    }
+
     /**
      * Confirms whether a department exists in the school system.
      *
@@ -31,7 +42,7 @@ public class SchoolManagementSystem {
      */
     public Department findDepartment(String id) {
         for (Department department : departments) {
-            if (department.getId().equals(id)) {
+            if (department != null && department.getId().equals(id)) {
                 return department;
             }
         }
@@ -47,11 +58,11 @@ public class SchoolManagementSystem {
     public void addDepartment(String departmentName) {
 
         if (departmentNum < MAX_DEPARTMENT_NUM) {
-            departments[departmentNum++] = new Department(departmentName);
-            System.out.println("Add a new department successfully.");
+            departments[departmentNum] = new Department(departmentName);
+            System.out.println("Add" + departments[departmentNum] + " successfully.");
+            departmentNum++;
         } else {
-            System.out.println("Max department reached, add a new department failed. There are %d departments " +
-                    "already. Add department failed.");
+            System.out.println("Max departments reached, add a new department failed.");
         }
     }
 
@@ -63,7 +74,7 @@ public class SchoolManagementSystem {
     public void printDepartments() {
         for (Department department : departments) {
             if (department != null) {
-                System.out.println(departments);
+                System.out.println(department);
             }
         }
     }
@@ -76,11 +87,10 @@ public class SchoolManagementSystem {
      */
     public Course findCourse(String id) {
         for (Course course : courses) {
-            if (course.getId().equals(id)) {
+            if (course != null && course.getId().equals(id)) {
                 return course;
             }
         }
-        // course not found
         return null;
     }
 
@@ -93,27 +103,30 @@ public class SchoolManagementSystem {
         Student student = findStudent(studentId);
         Course course = findCourse(courseId);
 
-        // Check if both exist
-        if (student == null || course == null) {
-            System.out.println("Student or course does not exist, ID not found.");
+        if (student == null) {
+            System.out.println("Cannot find student.");
             return;
         }
 
-        // Maxed courses?
+        if (course == null) {
+            System.out.println("Cannot find course.");
+        }
+
         if (student.getCourseNum() >= MAX_COURSES_PER_STUDENT) {
             System.out.println("Student has already registered the max number of courses.");
             return;
         }
 
-        // Maxed students?
-        if (course.getStudentNum() >= MAX_STUDENTS_PER_COURSE) {
+        if (course != null && course.getStudentNum() >= MAX_STUDENTS_PER_COURSE) {
             System.out.println("Course already has the max number of students.");
             return;
         }
 
         student.registerStudentCourse(course);
         System.out.println("Course successfully registered for student.");
-        course.registerCourseStudent(student);
+        if (course != null) {
+            course.registerCourseStudent(student);
+        }
         System.out.println("Student successfully registered for course.");
     }
 
@@ -127,11 +140,11 @@ public class SchoolManagementSystem {
 
         if (department != null) {
             if (courseNum < MAX_COURSE_NUM) {
-                // add the course
                 courses[courseNum] = new Course(courseName, credit, department);
+                System.out.println("Add" + courses[courseNum] + " successfully.");
+                courseNum++;
             } else {
-                // reached the capacity
-                System.out.printf("There are %d courses already. Add course failed.", MAX_COURSE_NUM);
+                System.out.println("Max courses reached, add a new course failed.");
             }
         } else {
             System.out.println("Department does not exist.");
@@ -146,7 +159,7 @@ public class SchoolManagementSystem {
     public void printCourses() {
         for (Course course : courses) {
             if (course != null) {
-                System.out.println(courses);
+                System.out.println(course);
             }
         }
     }
@@ -159,11 +172,10 @@ public class SchoolManagementSystem {
      */
     public Teacher findTeacher(String id) {
         for (Teacher teacher : teachers) {
-            if (teacher.getId().equals(id)) {
+            if (teacher != null && teacher.getId().equals(id)) {
                 return teacher;
             }
         }
-        // teacher not found
         return null;
     }
 
@@ -177,7 +189,6 @@ public class SchoolManagementSystem {
         Course course = findCourse(courseId);
 
         if (teacher != null && course != null) {
-            // modifying teacher of a course
             course.setTeacher(teacher);
             System.out.println("Successfully modified teacher of the course.");
         } else {
@@ -195,10 +206,11 @@ public class SchoolManagementSystem {
 
         if (department != null) {
             if (teacherNum < MAX_TEACHER_NUM) {
-                // add the teacher
                 teachers[teacherNum] = new Teacher(firstName, lastName, department);
+                System.out.println("Add" + teachers[teacherNum] + " successfully.");
+                teacherNum++;
             } else {
-                System.out.printf("There are %d teachers already. Add teacher failed.", MAX_TEACHER_NUM);
+                System.out.println("Max teachers reached, add a new teacher failed.");
             }
         } else {
             System.out.println("Department does not exist");
@@ -213,7 +225,7 @@ public class SchoolManagementSystem {
     public void printTeachers() {
         for (Teacher teacher : teachers) {
             if (teacher != null) {
-                System.out.println(teachers);
+                System.out.println(teacher);
             }
         }
     }
@@ -226,7 +238,7 @@ public class SchoolManagementSystem {
      */
     public Student findStudent(String id) {
         for (Student student : students) {
-            if (student.getId().equals(id)) {
+            if (student != null && student.getId().equals(id)) {
                 return student;
             }
         }
@@ -240,15 +252,15 @@ public class SchoolManagementSystem {
      * @author Geny Tang
      */
     public void addStudent(String firstName, String lastName, String departmentId) {
-        // finding department
         Department department = findDepartment(departmentId);
 
-        // add student if not null, if null prints message
         if (department != null) {
             if (studentNum < MAX_STUDENT_NUM) {
                 students[studentNum] = new Student(firstName, lastName, department);
+                System.out.println("Add" + students[studentNum] + " successfully.");
+                studentNum++;
             } else {
-                System.out.printf("There are %d students already. Add student failed.", MAX_STUDENT_NUM);
+                System.out.println("Max students reached, add a new student failed.");
             }
         } else {
             System.out.println("Department does not exist.");
@@ -263,7 +275,7 @@ public class SchoolManagementSystem {
     public void printStudents() {
         for (Student student : students) {
             if (student != null) {
-                System.out.println(students);
+                System.out.println(student);
             }
         }
     }

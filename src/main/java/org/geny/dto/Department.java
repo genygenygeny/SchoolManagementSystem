@@ -2,14 +2,13 @@ package org.geny.dto;
 
 import lombok.Getter;
 
-@Getter
-
 /**
  * Contains attributes such as id and departmentName.
  * The attributes are given to the objects of this class.
  *
  * @author Geny Tang
  */
+@Getter
 public class Department {
     private static int nextId = 1;
     private String id;

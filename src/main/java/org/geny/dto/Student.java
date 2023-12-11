@@ -1,9 +1,6 @@
 package org.geny.dto;
 
 import lombok.Getter;
-import java.util.Arrays;
-
-@Getter
 
 /**
  * This class has access to Department and Course.
@@ -12,6 +9,7 @@ import java.util.Arrays;
  *
  * @author Geny Tang
  */
+@Getter
 public class Student {
     private static final int MAX_COURSES_PER_STUDENT = 5;
     private static int nextId = 1;
@@ -32,9 +30,21 @@ public class Student {
      */
     public Student(String firstName, String lastName, Department department) {
         this.id = String.format("S%03d", nextId++);
+        this.courses = new Course[MAX_COURSES_PER_STUDENT];
+        this.courseNum = 0;
         this.firstName = firstName;
         this.lastName = lastName;
         this.department = department;
+    }
+
+    public String toStringCourses(Course[] courses) {
+        String coursesStr = "";
+        for (Course course : courses) {
+            if (course != null) {
+                coursesStr += getCourses();
+            }
+        }
+        return coursesStr;
     }
 
     /**
@@ -45,13 +55,19 @@ public class Student {
      */
     @Override
     public String toString() {
+        String departmentStr = "";
+
+        if (department != null) {
+            departmentStr += getDepartment().getDepartmentName();
+        }
+
         return "Student{" +
-                "firstName='" + firstName + '\'' +
+                "id='" + id + '\'' +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", id='" + id + '\'' +
-                ", courses=" + Arrays.toString(courses) +
+                ", department=" + departmentStr +
                 ", courseNum=" + courseNum +
-                ", department=" + department +
+                ", courses=" + toStringCourses(courses) +
                 '}';
     }
 

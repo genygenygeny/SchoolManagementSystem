@@ -2,13 +2,13 @@ package org.geny.dto;
 
 import lombok.Getter;
 
-@Getter
 /**
  * This class has access to Department.
  * Contains attributes such as firstName, lastName, id and department.
  *
  * @author Geny Tang
  */
+@Getter
 public class Teacher {
     private static int nextId = 1;
     private String firstName;
@@ -38,8 +38,8 @@ public class Teacher {
      */
     @Override
     public String toString() {
-        return "Teacher{" + ", id='" + id + '\'' +
-                "firstName='" + firstName + '\'' +
+        return "Teacher{" + "id='" + id + '\'' +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", department=" + department +
                 '}';
