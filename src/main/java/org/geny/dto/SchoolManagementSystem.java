@@ -35,7 +35,6 @@ public class SchoolManagementSystem {
                 return department;
             }
         }
-        // department not found
         return null;
     }
 
@@ -45,13 +44,14 @@ public class SchoolManagementSystem {
      *
      * @author Geny Tang
      */
-    public void addDepartment(Department department) {
+    public void addDepartment(String departmentName) {
+
         if (departmentNum < MAX_DEPARTMENT_NUM) {
-            // add the department
-            departments[departmentNum] = department;
+            departments[departmentNum++] = new Department(departmentName);
+            System.out.println("Add a new department successfully.");
         } else {
-            // reached capacity
-            System.out.printf("There are %d departments already. Add department failed.", MAX_DEPARTMENT_NUM);
+            System.out.println("Max department reached, add a new department failed. There are %d departments " +
+                    "already. Add department failed.");
         }
     }
 
@@ -108,11 +108,13 @@ public class SchoolManagementSystem {
         // Maxed students?
         if (course.getStudentNum() >= MAX_STUDENTS_PER_COURSE) {
             System.out.println("Course already has the max number of students.");
+            return;
         }
 
-        // Register a student to a course
-        student.registerCourse(course);
+        student.registerStudentCourse(course);
         System.out.println("Course successfully registered for student.");
+        course.registerCourseStudent(student);
+        System.out.println("Student successfully registered for course.");
     }
 
     /**
@@ -120,13 +122,19 @@ public class SchoolManagementSystem {
      *
      * @author Geny Tang
      */
-    public void addCourse(Course course) {
-        if (courseNum < MAX_COURSE_NUM) {
-            // add the course
-            courses[courseNum] = course;
+    public void addCourse(String courseName, double credit, String departmentId) {
+        Department department = findDepartment(departmentId);
+
+        if (department != null) {
+            if (courseNum < MAX_COURSE_NUM) {
+                // add the course
+                courses[courseNum] = new Course(courseName, credit, department);
+            } else {
+                // reached the capacity
+                System.out.printf("There are %d courses already. Add course failed.", MAX_COURSE_NUM);
+            }
         } else {
-            // reached the capacity
-            System.out.printf("There are %d courses already. Add course failed.", MAX_COURSE_NUM);
+            System.out.println("Department does not exist.");
         }
     }
 
@@ -182,12 +190,18 @@ public class SchoolManagementSystem {
      *
      * @author Geny Tang
      */
-    public void addTeacher(String firstName, String lastName, Department department, String id) {
-        if (teacherNum < MAX_TEACHER_NUM) {
-            // add the teacher
-            teachers[teacherNum] = new Teacher(firstName, lastName, department, id);
+    public void addTeacher(String firstName, String lastName, String departmentId) {
+        Department department = findDepartment(departmentId);
+
+        if (department != null) {
+            if (teacherNum < MAX_TEACHER_NUM) {
+                // add the teacher
+                teachers[teacherNum] = new Teacher(firstName, lastName, department);
+            } else {
+                System.out.printf("There are %d teachers already. Add teacher failed.", MAX_TEACHER_NUM);
+            }
         } else {
-            System.out.printf("There are %d teachers already. Add teacher failed.", MAX_TEACHER_NUM);
+            System.out.println("Department does not exist");
         }
     }
 
@@ -225,13 +239,19 @@ public class SchoolManagementSystem {
      *
      * @author Geny Tang
      */
-    public void addStudent(Student student) {
-        if (studentNum < MAX_STUDENT_NUM) {
-            // add the student
-            students[studentNum] = student;
+    public void addStudent(String firstName, String lastName, String departmentId) {
+        // finding department
+        Department department = findDepartment(departmentId);
+
+        // add student if not null, if null prints message
+        if (department != null) {
+            if (studentNum < MAX_STUDENT_NUM) {
+                students[studentNum] = new Student(firstName, lastName, department);
+            } else {
+                System.out.printf("There are %d students already. Add student failed.", MAX_STUDENT_NUM);
+            }
         } else {
-            // reached capacity
-            System.out.printf("There are %d students already. Add student failed.", MAX_STUDENT_NUM);
+            System.out.println("Department does not exist.");
         }
     }
 

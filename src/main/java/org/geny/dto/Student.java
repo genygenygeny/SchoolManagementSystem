@@ -13,6 +13,7 @@ import java.util.Arrays;
  * @author Geny Tang
  */
 public class Student {
+    private static final int MAX_COURSES_PER_STUDENT = 5;
     private static int nextId = 1;
     private String firstName;
     private String lastName;
@@ -29,7 +30,7 @@ public class Student {
      * @param department department of student.
      * @author Geny Tang
      */
-    public Student(String firstName, String lastName, String id, Department department) {
+    public Student(String firstName, String lastName, Department department) {
         this.id = String.format("S%03d", nextId++);
         this.firstName = firstName;
         this.lastName = lastName;
@@ -52,5 +53,19 @@ public class Student {
                 ", courseNum=" + courseNum +
                 ", department=" + department +
                 '}';
+    }
+
+    public void registerStudentCourse(Course course) {
+        if (courseNum < MAX_COURSES_PER_STUDENT) {
+            for (int i = 0; i < courseNum; i++) {
+                if (course == courses[i]) {
+                    System.out.println("Student already registered to course.");
+                }
+            }
+            courses[courseNum] = course;
+            courseNum++;
+        } else {
+            System.out.println("Student has reached maximum courses");
+        }
     }
 }

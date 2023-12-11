@@ -15,8 +15,8 @@ import java.util.Arrays;
  * @author Geny Tang
  */
 public class Course {
+    private static final int MAX_STUDENTS_PER_COURSE = 5;
     private static int nextId = 1;
-
     private String courseName;
     private String id;
     private double credit;
@@ -57,5 +57,12 @@ public class Course {
                 ", studentNum=" + studentNum +
                 ", department=" + department +
                 '}';
+    }
+
+    public void registerCourseStudent(Student student) {
+        if (studentNum < MAX_STUDENTS_PER_COURSE) {
+            students[studentNum] = student;
+            studentNum++;
+        }
     }
 }

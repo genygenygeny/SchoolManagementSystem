@@ -22,9 +22,8 @@ public class Teacher {
      * @param firstName  first name of teacher.
      * @param lastName   last name of teacher.
      * @param department department of teacher.
-     * @param id
      */
-    public Teacher(String firstName, String lastName, Department department, String id) {
+    public Teacher(String firstName, String lastName, Department department) {
         this.id = String.format("T%03d", nextId++);
         this.firstName = firstName;
         this.lastName = lastName;
